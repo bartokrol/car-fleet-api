@@ -130,8 +130,8 @@ function App() {
 						setCars((cars) => {
 							cars = [...cars];
 							cars = cars.map((car) => {
-								car = {
-									...car,
+								car[car.carId] = {
+									...car[car.carId],
 									geoPosition: {
 										geoWidthPosition:
 											Number(geoWidthPosition) +
@@ -143,7 +143,7 @@ function App() {
 								};
 								return car;
 							});
-							// localStorage.setItem("cars", JSON.stringify(cars));
+							localStorage.setItem("cars", JSON.stringify(cars));
 							return cars;
 						});
 					};
@@ -151,7 +151,7 @@ function App() {
 				} while (fetchedCars.length < carsCount);
 				if (fetchedCars.length === carsCount) {
 					setCars(fetchedCars);
-					// localStorage.setItem("cars", JSON.stringify(fetchedCars));
+					localStorage.setItem("cars", JSON.stringify(fetchedCars));
 				}
 			}
 			fetchDrivers();
@@ -166,7 +166,7 @@ function App() {
 				...cars[id],
 				favorite: !cars[id].favorite,
 			};
-			// localStorage.setItem("cars", JSON.stringify(cars));
+			localStorage.setItem("cars", JSON.stringify(cars));
 			return cars;
 		});
 	};

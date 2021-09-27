@@ -1,8 +1,13 @@
-const FilteringSection = ({ cars }) => {
-	const mapOptions = (filterArr) => {
-		return filterArr.map((type) => (
-			<option key={type} value={type}>
-				{type}
+const FilteringSection = ({
+	cars,
+	filterPhoneClick,
+	filterFirstClick,
+	filterLastClick,
+}) => {
+	const mapOptions = (type, clickType) => {
+		return type.map((typeEl) => (
+			<option key={typeEl} value={typeEl} onClick={clickType}>
+				{typeEl}
 			</option>
 		));
 	};
