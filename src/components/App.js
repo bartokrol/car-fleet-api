@@ -46,11 +46,11 @@ function App() {
 
 			const fetchGeoPosition = () => {
 				const geoWidthPosition = fetchGeo(widthGeo.min, widthGeo.max);
-				const geoLenghtPosition = fetchGeo(
+				const geoLengthPosition = fetchGeo(
 					lengthGeo.min,
 					lengthGeo.max
 				);
-				return { geoWidthPosition, geoLenghtPosition };
+				return { geoWidthPosition, geoLengthPosition };
 			};
 			const fetchGeo = (min, max) => {
 				const geo = Math.random() * (max - min) + min;
@@ -87,7 +87,7 @@ function App() {
 					const licenseNumber = fetchLicense(licenseNumberCount);
 					const { first, last } = drivers[carId].name;
 					const phone = fetchPhoneNumber();
-					const { geoWidthPosition, geoLenghtPosition } =
+					const { geoWidthPosition, geoLengthPosition } =
 						fetchGeoPosition();
 					const speed = fetchSpeed(minSpeed, maxSpeed);
 					fetchedCars.push({
@@ -100,7 +100,7 @@ function App() {
 						phone,
 						geoPosition: {
 							geoWidthPosition,
-							geoLenghtPosition,
+							geoLengthPosition,
 						},
 						speed,
 						favorite: false,
@@ -133,8 +133,8 @@ function App() {
 										geoWidthPosition:
 											Number(geoWidthPosition) +
 											degreesWidthInThreeSeconds,
-										geoLenghtPosition:
-											Number(geoLenghtPosition) +
+										geoLengthPosition:
+											Number(geoLengthPosition) +
 											degreesLengthInThreeSeconds,
 									},
 								};
