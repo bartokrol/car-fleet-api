@@ -9,6 +9,11 @@ function App() {
 	const [cars, setCars] = useState([]);
 
 	useEffect(() => {
+		const fetchPhoneNumber = () => {
+			const phoneNumber = Math.random().toString().slice(4, 13);
+			return phoneNumber;
+		};
+
 		const fetchLicense = (number) => {
 			let carLicenseLetters = "";
 			let carLicenseNumbers = "";
@@ -33,11 +38,13 @@ function App() {
 			do {
 				const licenseNumber = fetchLicense(licenseNumberCount);
 				const { first, last } = drivers[carId].name;
+				const phone = fetchPhoneNumber();
 				fetchedCars.push({
 					carId,
 					licenseNumber,
 					first,
 					last,
+					phone,
 				});
 				carId++;
 			} while (fetchedCars.length < carsCount);
