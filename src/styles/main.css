@@ -50,12 +50,14 @@
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: favorite;
+  margin: auto auto;
 }
 
 .carFleet__cars__car__moreBtn {
   -ms-grid-row: 3;
   -ms-grid-column: 2;
   grid-area: moreBtn;
+  margin: auto auto;
 }
 
 .carFleet__cars__car__moreInfo {
@@ -63,5 +65,25 @@
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: moreInfo;
+}
+
+.carFleet__cars__car__moreInfo__driver__name {
+  font-weight: bold;
+}
+
+.carFleet__cars__car__moreInfo__phone__number {
+  font-weight: bold;
+}
+
+.carFleet__cars__car__moreInfo__geoLocation__width__icon {
+  font-weight: bold;
+}
+
+.carFleet__cars__car__moreInfo__geoLocation__length__icon {
+  font-weight: bold;
+}
+
+.carFleet__cars__car__moreInfo__speed__number {
+  font-weight: bold;
 }
 /*# sourceMappingURL=main.css.map */

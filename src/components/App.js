@@ -155,9 +155,27 @@ function App() {
 			fetchDrivers();
 		}
 	}, []);
+
+	const handleFavoriteChange = (e) => {
+		const id = e.target.dataset.id;
+		setCars((cars) => {
+			cars = [...cars];
+			cars[id] = {
+				...cars[id],
+				favorite: !cars[id].favorite,
+			};
+			// localStorage.setItem("cars", JSON.stringify(cars));
+			return cars;
+		});
+	};
+
 	return (
 		<div className={basicClassName}>
-			<Cars carsClass={basicClassName} cars={cars} />
+			<Cars
+				carsClass={basicClassName}
+				cars={cars}
+				favoriteChange={handleFavoriteChange}
+			/>
 		</div>
 	);
 }

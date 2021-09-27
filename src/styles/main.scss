@@ -31,12 +31,41 @@
 			}
 			&__favorite {
 				grid-area: favorite;
+				margin: auto auto;
 			}
 			&__moreBtn {
 				grid-area: moreBtn;
+				margin: auto auto;
 			}
 			&__moreInfo {
 				grid-area: moreInfo;
+				&__driver {
+					&__name {
+						font-weight: bold;
+					}
+				}
+				&__phone {
+					&__number {
+						font-weight: bold;
+					}
+				}
+				&__geoLocation {
+					&__width {
+						&__icon {
+							font-weight: bold;
+						}
+					}
+					&__length {
+						&__icon {
+							font-weight: bold;
+						}
+					}
+				}
+				&__speed {
+					&__number {
+						font-weight: bold;
+					}
+				}
 			}
 			border-bottom: 3px solid black;
 		}

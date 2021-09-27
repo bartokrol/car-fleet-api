@@ -1,6 +1,11 @@
-const Car = ({ carClass, car }) => {
+import blackHeart from "../styles/images/blackHeart.png";
+import redHeart from "../styles/images/redHeart.png";
+
+const Car = ({ carClass, car, favoriteChange }) => {
 	const carClassName = `${carClass}__car`;
-	const { licenseNumber, name, phone, geoPosition, speed } = car;
+	const { carId, licenseNumber, name, phone, geoPosition, speed, favorite } =
+		car;
+	const imgSrc = favorite ? redHeart : blackHeart;
 
 	return (
 		<div className={`${carClassName}`}>
@@ -11,7 +16,13 @@ const Car = ({ carClass, car }) => {
 				</span>
 			</div>
 			<h1 className={`${carClassName}__img`}>IMG</h1>
-			<h2 className={`${carClassName}__favorite`}>FAVORITE</h2>
+			<img
+				data-id={carId}
+				src={imgSrc}
+				className={`${carClassName}__favorite`}
+				onClick={favoriteChange}
+				alt="favorite"
+			/>
 			<button
 				className={`${carClassName}__moreBtn`}
 				onClick={() => {
@@ -23,7 +34,7 @@ const Car = ({ carClass, car }) => {
 			<div className={`${carClassName}__moreInfo`}>
 				<div className={`${carClassName}__moreInfo__driver`}>
 					Kierowca:
-					<span className={`${carClassName}__moreInfo__driver_name`}>
+					<span className={`${carClassName}__moreInfo__driver__name`}>
 						{name.first} {name.last}
 					</span>
 				</div>
@@ -46,6 +57,7 @@ const Car = ({ carClass, car }) => {
 						>
 							N
 						</span>
+						,
 					</span>
 					<span
 						className={`${carClassName}__moreInfo__geoLocation__length`}
