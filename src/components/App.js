@@ -62,11 +62,15 @@ function App() {
 				fetchedCars.push({
 					carId,
 					licenseNumber,
-					first,
-					last,
+					name: {
+						first,
+						last,
+					},
 					phone,
-					geoWidthPosition,
-					geoLenghtPosition,
+					geoPosition: {
+						geoWidthPosition,
+						geoLenghtPosition,
+					},
 				});
 				carId++;
 			} while (fetchedCars.length < carsCount);
