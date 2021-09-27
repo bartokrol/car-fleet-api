@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const carsCount = 20;
 const letters = "ABCDEFZGHIJKLMNOPQRSTWXYZ";
 const licenseNumberCount = 3;
+const DRIVER_API = `https://randomuser.me/api/?results=${carsCount}&inc=name`;
 
 function App() {
 	const [cars, setCars] = useState([]);
@@ -20,21 +21,31 @@ function App() {
 			return licenseNumber;
 		};
 
-		const fetchDrivers = () => {
+		async function fetchDrivers() {
+			const drivers = await fetch(DRIVER_API).then((response) =>
+				response
+					.json()
+					.then((data) => data.results)
+					.catch((error) => console.log(error))
+			);
 			const fetchedCars = [];
 			let carId = 0;
 			do {
 				const licenseNumber = fetchLicense(licenseNumberCount);
+				const { first, last } = drivers[carId].name;
 				fetchedCars.push({
 					carId,
 					licenseNumber,
+					first,
+					last,
 				});
 				carId++;
 			} while (fetchedCars.length < carsCount);
 			if (fetchedCars.length === carsCount) {
+				console.log(fetchedCars);
 				setCars(fetchedCars);
 			}
-		};
+		}
 		fetchDrivers();
 	}, []);
 	return <div className="App"></div>;
