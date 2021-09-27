@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Cars from "../layouts/Cars";
+import FilteringSection from "../layouts/FilteringSection";
 import "../styles/main.css";
 
 const carsCount = 20;
@@ -33,7 +34,6 @@ const basicClassName = "carFleet";
 
 function App() {
 	const [cars, setCars] = useState([]);
-	const [filteredCars, setFilteredCars] = useState([]);
 
 	useEffect(() => {
 		if (localStorage.length) {
@@ -208,6 +208,7 @@ function App() {
 
 	return (
 		<div className={basicClassName}>
+			<FilteringSection cars={cars} />
 			<Cars
 				carsClass={basicClassName}
 				cars={cars}
