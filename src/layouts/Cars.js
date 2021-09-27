@@ -1,9 +1,9 @@
 import Car from "./Car";
 
-const Cars = ({ basicClassName, cars }) => {
-	const carsClassName = `${basicClassName}__cars`;
+const Cars = ({ carsClass, cars }) => {
+	const carsClassName = `${carsClass}__cars`;
 	const carsFiltered = cars.map((car) => (
-		<Car carClass={carsClassName} car={car} />
+		<Car key={car.id} carClass={carsClassName} car={car} />
 	));
 	return <div className={carsClassName}>{carsFiltered}</div>;
 };

@@ -4,4 +4,64 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+
+.carFleet {
+  background-color: beige;
+}
+
+.carFleet__cars__car {
+  padding: 10px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2fr 1fr;
+      grid-template-columns: 2fr 1fr;
+  -ms-grid-rows: 0.5fr 1fr 1fr 1fr;
+      grid-template-rows: 0.5fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+      grid-template-areas: "licenseNumber licenseNumber" "img favorite" "img moreBtn" "moreInfo moreInfo";
+  border-bottom: 3px solid black;
+}
+
+.carFleet__cars__car__licenseNumber {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: licenseNumber;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+}
+
+.carFleet__cars__car__licenseNumber__license {
+  font-weight: bold;
+}
+
+.carFleet__cars__car__img {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: img;
+}
+
+.carFleet__cars__car__favorite {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: favorite;
+}
+
+.carFleet__cars__car__moreBtn {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: moreBtn;
+}
+
+.carFleet__cars__car__moreInfo {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: moreInfo;
+}
 /*# sourceMappingURL=main.css.map */

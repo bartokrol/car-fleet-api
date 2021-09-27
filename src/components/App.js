@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Cars from "../layouts/Cars";
+import "../styles/main.css";
 
 const carsCount = 20;
 const letters = "ABCDEFZGHIJKLMNOPQRSTWXYZ";
@@ -28,7 +29,7 @@ const kilometerWidth = polishWidthInDegrees / polishWidthInKilometers;
 const minSpeed = 60;
 const maxSpeed = 200;
 
-const basicClassName = "CarFleet";
+const basicClassName = "carFleet";
 
 function App() {
 	const [cars, setCars] = useState([]);

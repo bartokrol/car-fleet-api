@@ -3,3 +3,42 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+
+.carFleet {
+	background-color: beige;
+	&__cars {
+		&__car {
+			padding: 10px;
+			display: grid;
+			grid-template-columns: 2fr 1fr;
+			grid-template-rows: 0.5fr 1fr 1fr 1fr;
+			gap: 0px 0px;
+			grid-template-areas:
+				"licenseNumber licenseNumber"
+				"img favorite"
+				"img moreBtn"
+				"moreInfo moreInfo";
+			&__licenseNumber {
+				grid-area: licenseNumber;
+				display: flex;
+				align-items: end;
+				&__license {
+					font-weight: bold;
+				}
+			}
+			&__img {
+				grid-area: img;
+			}
+			&__favorite {
+				grid-area: favorite;
+			}
+			&__moreBtn {
+				grid-area: moreBtn;
+			}
+			&__moreInfo {
+				grid-area: moreInfo;
+			}
+			border-bottom: 3px solid black;
+		}
+	}
+}
