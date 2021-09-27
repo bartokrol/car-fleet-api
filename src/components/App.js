@@ -12,11 +12,18 @@ const widthGeo = {
 	min: 49.0,
 	max: 54.5,
 };
+const minSpeed = 60;
+const maxSpeed = 200;
 
 function App() {
 	const [cars, setCars] = useState([]);
 
 	useEffect(() => {
+		const fetchSpeed = (min, max) => {
+			const speed = Math.floor(Math.random() * (max - min) + min);
+			return speed;
+		};
+
 		const fetchGeoPosition = () => {
 			const geoWidthPosition = fetchGeo(widthGeo.min, widthGeo.max);
 			const geoLenghtPosition = fetchGeo(lengthGeo.min, lengthGeo.max);
@@ -59,6 +66,7 @@ function App() {
 				const phone = fetchPhoneNumber();
 				const { geoWidthPosition, geoLenghtPosition } =
 					fetchGeoPosition();
+				const speed = fetchSpeed(minSpeed, maxSpeed);
 				fetchedCars.push({
 					carId,
 					licenseNumber,
@@ -71,6 +79,7 @@ function App() {
 						geoWidthPosition,
 						geoLenghtPosition,
 					},
+					speed,
 				});
 				carId++;
 			} while (fetchedCars.length < carsCount);
