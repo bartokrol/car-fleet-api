@@ -136,14 +136,15 @@ function App() {
 								};
 								return car;
 							});
+							localStorage.setItem("cars", JSON.stringify(cars));
 							return cars;
 						});
 					};
-					setInterval(() => intervalCarDistance(), 3000);
+					setInterval(() => intervalCarDistance(speed), 3000);
 				} while (fetchedCars.length < carsCount);
 				if (fetchedCars.length === carsCount) {
 					setCars(fetchedCars);
-					// localStorage.setItem("cars", JSON.stringify(fetchedCars));
+					localStorage.setItem("cars", JSON.stringify(fetchedCars));
 				}
 			}
 			fetchDrivers();
