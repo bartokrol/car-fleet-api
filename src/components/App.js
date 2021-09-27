@@ -144,7 +144,7 @@ function App() {
 							return cars;
 						});
 					};
-					setInterval(() => intervalCarDistance(speed), 3000);
+					// setInterval(() => intervalCarDistance(speed), 3000);
 				} while (fetchedCars.length < carsCount);
 				if (fetchedCars.length === carsCount) {
 					setCars(fetchedCars);
