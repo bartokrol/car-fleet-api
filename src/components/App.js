@@ -36,9 +36,72 @@ function App() {
 	const [cars, setCars] = useState([]);
 
 	useEffect(() => {
+		const handleInterval = (
+			id,
+			speed,
+			geoWidthPosition,
+			geoLengthPosition
+		) => {
+			const distanceInThreeSeconds = ((speed / 3.6) * 3).toFixed(0);
+			const lengthDistance = Math.random();
+			const widthDistance = 1 - lengthDistance;
+			const degreesLengthInThreeSeconds =
+				(distanceInThreeSeconds / 1000) *
+				lengthDistance *
+				kilometerLength;
+
+			const degreesWidthInThreeSeconds =
+				(distanceInThreeSeconds / 1000) *
+				widthDistance *
+				kilometerWidth;
+
+			setCars((cars) => {
+				cars = [...cars];
+				cars[id] = {
+					...cars[id],
+					geoPosition: {
+						geoWidthPosition: (
+							Number(geoWidthPosition) +
+							degreesWidthInThreeSeconds
+						).toFixed(4),
+						geoLengthPosition: (
+							Number(geoLengthPosition) +
+							degreesLengthInThreeSeconds
+						).toFixed(4),
+					},
+				};
+				localStorage.setItem("cars", JSON.stringify(cars));
+				return cars;
+			});
+		};
+		const startInterval = (
+			carId,
+			speed,
+			geoWidthPosition,
+			geoLengthPosition
+		) => {
+			setInterval(function () {
+				handleInterval(
+					carId,
+					speed,
+					geoWidthPosition,
+					geoLengthPosition
+				);
+			}, 3000);
+		};
+
 		if (localStorage.length) {
-			const localCars = localStorage.getItem("cars");
-			setCars(JSON.parse(localCars));
+			const localCars = JSON.parse(localStorage.getItem("cars"));
+			setCars(localCars);
+			localCars.forEach((car) => {
+				const { carId, speed, geoPosition } = car;
+				startInterval(
+					carId,
+					speed,
+					geoPosition.geoWidthPosition,
+					geoPosition.geoLengthPosition
+				);
+			});
 		}
 		if (!localStorage.length) {
 			const fetchSpeed = (min, max) => {
@@ -109,58 +172,12 @@ function App() {
 						more: false,
 					});
 
-					const handleInterval = (
-						id,
+					startInterval(
+						carId,
 						speed,
 						geoWidthPosition,
 						geoLengthPosition
-					) => {
-						const distanceInThreeSeconds = (
-							(speed / 3.6) *
-							3
-						).toFixed(0);
-						const lengthDistance = Math.random();
-						const widthDistance = 1 - lengthDistance;
-						const degreesLengthInThreeSeconds =
-							(distanceInThreeSeconds / 1000) *
-							lengthDistance *
-							kilometerLength;
-
-						const degreesWidthInThreeSeconds =
-							(distanceInThreeSeconds / 1000) *
-							widthDistance *
-							kilometerWidth;
-
-						setCars((cars) => {
-							cars = [...cars];
-							cars[id] = {
-								...cars[id],
-								geoPosition: {
-									geoWidthPosition: (
-										Number(geoWidthPosition) +
-										degreesWidthInThreeSeconds
-									).toFixed(4),
-									geoLengthPosition: (
-										Number(geoLengthPosition) +
-										degreesLengthInThreeSeconds
-									).toFixed(4),
-								},
-							};
-							localStorage.setItem("cars", JSON.stringify(cars));
-							return cars;
-						});
-					};
-					const startInterval = (carId) => {
-						setInterval(function () {
-							handleInterval(
-								carId,
-								speed,
-								geoWidthPosition,
-								geoLengthPosition
-							);
-						}, 3000);
-					};
-					startInterval(carId);
+					);
 
 					carId++;
 				} while (fetchedCars.length < carsCount);
