@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import Cars from "../layouts/Cars";
 
-const carsCount = 1;
+const carsCount = 20;
 const letters = "ABCDEFZGHIJKLMNOPQRSTWXYZ";
 const licenseNumberCount = 3;
 const DRIVER_API = `https://randomuser.me/api/?results=${carsCount}&inc=name`;
@@ -26,6 +27,8 @@ const kilometerWidth = polishWidthInDegrees / polishWidthInKilometers;
 
 const minSpeed = 60;
 const maxSpeed = 200;
+
+const basicClassName = "CarFleet";
 
 function App() {
 	const [cars, setCars] = useState([]);
@@ -100,6 +103,7 @@ function App() {
 							geoLenghtPosition,
 						},
 						speed,
+						favorite: false,
 					});
 					carId++;
 
@@ -136,7 +140,7 @@ function App() {
 								};
 								return car;
 							});
-							localStorage.setItem("cars", JSON.stringify(cars));
+							// localStorage.setItem("cars", JSON.stringify(cars));
 							return cars;
 						});
 					};
@@ -144,13 +148,17 @@ function App() {
 				} while (fetchedCars.length < carsCount);
 				if (fetchedCars.length === carsCount) {
 					setCars(fetchedCars);
-					localStorage.setItem("cars", JSON.stringify(fetchedCars));
+					// localStorage.setItem("cars", JSON.stringify(fetchedCars));
 				}
 			}
 			fetchDrivers();
 		}
 	}, []);
-	return <div className="App"></div>;
+	return (
+		<div className={basicClassName}>
+			<Cars carsClass={basicClassName} cars={cars} />
+		</div>
+	);
 }
 
 export default App;
