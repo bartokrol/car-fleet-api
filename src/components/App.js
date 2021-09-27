@@ -172,23 +172,38 @@ function App() {
 	};
 
 	const handleMoreChange = (e) => {
+		const more = e.target.dataset.more;
 		const id = Number(e.target.dataset.id);
-		setCars((cars) => {
-			cars = [...cars];
-			cars[id] = {
-				...cars[id],
-				more: !cars[id].more,
-			};
-			cars[id - 1] = {
-				...cars[id - 1],
-				more: !cars[id - 1].more,
-			};
-			cars[id + 1] = {
-				...cars[id + 1],
-				more: !cars[id + 1].more,
-			};
-			return cars;
-		});
+
+		if (more === "true") {
+			setCars((cars) => {
+				cars = [...cars];
+				cars[id] = {
+					...cars[id],
+					more: false,
+				};
+				return cars;
+			});
+		}
+
+		if (more === "false") {
+			setCars((cars) => {
+				cars = [...cars];
+				cars[id] = {
+					...cars[id],
+					more: true,
+				};
+				cars[id - 1] = {
+					...cars[id - 1],
+					more: true,
+				};
+				cars[id + 1] = {
+					...cars[id + 1],
+					more: true,
+				};
+				return cars;
+			});
+		}
 	};
 
 	return (

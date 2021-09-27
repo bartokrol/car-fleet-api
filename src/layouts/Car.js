@@ -34,6 +34,7 @@ const Car = ({ carClass, car, favoriteChange, moreChange }) => {
 			<button
 				className={`${carClassName}__moreBtn`}
 				data-id={carId}
+				data-more={more}
 				onClick={moreChange}
 			>
 				{more ? "Mniej" : "Więcej..."}
