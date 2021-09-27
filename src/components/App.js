@@ -33,6 +33,7 @@ const basicClassName = "carFleet";
 
 function App() {
 	const [cars, setCars] = useState([]);
+	const [filteredCars, setFilteredCars] = useState([]);
 
 	useEffect(() => {
 		if (localStorage.length) {
@@ -105,6 +106,7 @@ function App() {
 						},
 						speed,
 						favorite: false,
+						more: false,
 					});
 					carId++;
 
@@ -169,12 +171,33 @@ function App() {
 		});
 	};
 
+	const handleMoreChange = (e) => {
+		const id = Number(e.target.dataset.id);
+		setCars((cars) => {
+			cars = [...cars];
+			cars[id] = {
+				...cars[id],
+				more: !cars[id].more,
+			};
+			cars[id - 1] = {
+				...cars[id - 1],
+				more: !cars[id - 1].more,
+			};
+			cars[id + 1] = {
+				...cars[id + 1],
+				more: !cars[id + 1].more,
+			};
+			return cars;
+		});
+	};
+
 	return (
 		<div className={basicClassName}>
 			<Cars
 				carsClass={basicClassName}
 				cars={cars}
 				favoriteChange={handleFavoriteChange}
+				moreChange={handleMoreChange}
 			/>
 		</div>
 	);

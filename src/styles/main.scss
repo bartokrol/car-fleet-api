@@ -47,6 +47,13 @@
 				&__phone {
 					&__number {
 						font-weight: bold;
+						text-decoration: none;
+						color: black;
+						transition: all 0.2s ease;
+						&:hover {
+							opacity: 0.5;
+							transition: all 0.2s ease;
+						}
 					}
 				}
 				&__geoLocation {

@@ -73,6 +73,16 @@
 
 .carFleet__cars__car__moreInfo__phone__number {
   font-weight: bold;
+  text-decoration: none;
+  color: black;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.carFleet__cars__car__moreInfo__phone__number:hover {
+  opacity: 0.5;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .carFleet__cars__car__moreInfo__geoLocation__width__icon {

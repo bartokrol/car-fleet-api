@@ -1,10 +1,18 @@
 import blackHeart from "../styles/images/blackHeart.png";
 import redHeart from "../styles/images/redHeart.png";
 
-const Car = ({ carClass, car, favoriteChange }) => {
+const Car = ({ carClass, car, favoriteChange, moreChange }) => {
 	const carClassName = `${carClass}__car`;
-	const { carId, licenseNumber, name, phone, geoPosition, speed, favorite } =
-		car;
+	const {
+		carId,
+		licenseNumber,
+		name,
+		phone,
+		geoPosition,
+		speed,
+		favorite,
+		more,
+	} = car;
 	const imgSrc = favorite ? redHeart : blackHeart;
 
 	return (
@@ -25,65 +33,69 @@ const Car = ({ carClass, car, favoriteChange }) => {
 			/>
 			<button
 				className={`${carClassName}__moreBtn`}
-				onClick={() => {
-					console.log("klik");
-				}}
+				data-id={carId}
+				onClick={moreChange}
 			>
-				Więcej...
+				{more ? "Mniej" : "Więcej..."}
 			</button>
-			<div className={`${carClassName}__moreInfo`}>
-				<div className={`${carClassName}__moreInfo__driver`}>
-					Kierowca:
-					<span className={`${carClassName}__moreInfo__driver__name`}>
-						{name.first} {name.last}
-					</span>
-				</div>
-				<div className={`${carClassName}__moreInfo__phone`}>
-					Nr.kontaktowy:
-					<span
-						className={`${carClassName}__moreInfo__phone__number`}
-					>
-						{phone}
-					</span>
-				</div>
-				<div className={`${carClassName}__moreInfo__geoLocation`}>
-					Współrzędne geograficzne:
-					<span
-						className={`${carClassName}__moreInfo__geoLocation__width`}
-					>
-						{geoPosition.geoWidthPosition}
+			{more ? (
+				<div className={`${carClassName}__moreInfo`}>
+					<div className={`${carClassName}__moreInfo__driver`}>
+						Kierowca:
 						<span
-							className={`${carClassName}__moreInfo__geoLocation__width__icon`}
+							className={`${carClassName}__moreInfo__driver__name`}
 						>
-							N
+							{name.first} {name.last}
 						</span>
-						,
-					</span>
-					<span
-						className={`${carClassName}__moreInfo__geoLocation__length`}
-					>
-						{geoPosition.geoLengthPosition}
+					</div>
+					<div className={`${carClassName}__moreInfo__phone`}>
+						Nr.kontaktowy:
+						<a
+							href="tel:5551234567"
+							className={`${carClassName}__moreInfo__phone__number`}
+						>
+							{phone}
+						</a>
+					</div>
+					<div className={`${carClassName}__moreInfo__geoLocation`}>
+						Współrzędne geograficzne:
 						<span
-							className={`${carClassName}__moreInfo__geoLocation__length__icon`}
+							className={`${carClassName}__moreInfo__geoLocation__width`}
 						>
-							E
+							{geoPosition.geoWidthPosition}
+							<span
+								className={`${carClassName}__moreInfo__geoLocation__width__icon`}
+							>
+								N
+							</span>
+							,
 						</span>
-					</span>
-				</div>
-				<div className={`${carClassName}__moreInfo__speed`}>
-					Średnia prędkość:
-					<span
-						className={`${carClassName}__moreInfo__speed__number`}
-					>
-						{speed}
 						<span
-							className={`${carClassName}__moreInfo__speed__number__icon`}
+							className={`${carClassName}__moreInfo__geoLocation__length`}
 						>
-							km/h
+							{geoPosition.geoLengthPosition}
+							<span
+								className={`${carClassName}__moreInfo__geoLocation__length__icon`}
+							>
+								E
+							</span>
 						</span>
-					</span>
+					</div>
+					<div className={`${carClassName}__moreInfo__speed`}>
+						Średnia prędkość:
+						<span
+							className={`${carClassName}__moreInfo__speed__number`}
+						>
+							{speed}
+							<span
+								className={`${carClassName}__moreInfo__speed__number__icon`}
+							>
+								km/h
+							</span>
+						</span>
+					</div>
 				</div>
-			</div>
+			) : null}
 		</div>
 	);
 };

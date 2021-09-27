@@ -1,6 +1,6 @@
 import Car from "./Car";
 
-const Cars = ({ carsClass, cars, favoriteChange }) => {
+const Cars = ({ carsClass, cars, favoriteChange, moreChange }) => {
 	const carsClassName = `${carsClass}__cars`;
 	const mapCars = (filterArr) => {
 		return filterArr.map((car) => (
@@ -9,16 +9,17 @@ const Cars = ({ carsClass, cars, favoriteChange }) => {
 				carClass={carsClassName}
 				car={car}
 				favoriteChange={favoriteChange}
+				moreChange={moreChange}
 			/>
 		));
 	};
 
-	const favoriteCarsMap = mapCars(cars.filter((car) => car.favorite));
-	const normalCarsMap = mapCars(cars.filter((car) => !car.favorite));
+	const favoriteCarsFilter = mapCars(cars.filter((car) => car.favorite));
+	const normalCarsFilter = mapCars(cars.filter((car) => !car.favorite));
 	return (
 		<div className={carsClassName}>
-			{favoriteCarsMap}
-			{normalCarsMap}
+			{favoriteCarsFilter}
+			{normalCarsFilter}
 		</div>
 	);
 };
