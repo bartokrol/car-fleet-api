@@ -24,18 +24,6 @@ const polishWidthInKilometers = 689;
 const kilometerLength = polishLengthInDegrees / polishLenghtInKilometers;
 const kilometerWidth = polishWidthInDegrees / polishWidthInKilometers;
 
-// setInterval(() => {
-// 	setCars((cars) => {
-// 		cars = [...cars];
-// 		cars[carId] = {
-// 			...cars[carId],
-// 			speed: cars[carId].speed++,
-// 		};
-// 		return cars;
-// 	});
-// 	console.log(speed + 1);
-// }, 3000);
-
 const minSpeed = 60;
 const maxSpeed = 200;
 
@@ -114,10 +102,48 @@ function App() {
 						speed,
 					});
 					carId++;
+
+					const intervalCarDistance = (speed) => {
+						const distanceInThreeSeconds = (
+							(speed / 3.6) *
+							3
+						).toFixed(0);
+						const lengthDistance = Math.random();
+						const widthDistance = 1 - lengthDistance;
+						const degreesLengthInThreeSeconds =
+							(distanceInThreeSeconds / 1000) *
+							lengthDistance *
+							kilometerLength;
+
+						const degreesWidthInThreeSeconds =
+							(distanceInThreeSeconds / 1000) *
+							widthDistance *
+							kilometerWidth;
+
+						setCars((cars) => {
+							cars = [...cars];
+							cars = cars.map((car) => {
+								car = {
+									...car,
+									geoPosition: {
+										geoWidthPosition:
+											Number(geoWidthPosition) +
+											degreesWidthInThreeSeconds,
+										geoLenghtPosition:
+											Number(geoLenghtPosition) +
+											degreesLengthInThreeSeconds,
+									},
+								};
+								return car;
+							});
+							return cars;
+						});
+					};
+					setInterval(() => intervalCarDistance(), 3000);
 				} while (fetchedCars.length < carsCount);
 				if (fetchedCars.length === carsCount) {
 					setCars(fetchedCars);
-					localStorage.setItem("cars", JSON.stringify(fetchedCars));
+					// localStorage.setItem("cars", JSON.stringify(fetchedCars));
 				}
 			}
 			fetchDrivers();
