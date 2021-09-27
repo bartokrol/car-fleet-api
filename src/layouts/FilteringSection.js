@@ -1,18 +1,20 @@
 const FilteringSection = ({ cars }) => {
+	const mapOptions = (filterArr) => {
+		return filterArr.map((type) => (
+			<option key={type} value={type}>
+				{type}
+			</option>
+		));
+	};
+
 	const firstFilter = cars.map((car) => car.name.first);
-	const firstOptions = firstFilter.map((first) => (
-		<option value={first}>{first}</option>
-	));
+	const firstOptions = mapOptions(firstFilter);
 
 	const lastFilter = cars.map((car) => car.name.last);
-	const lastOptions = lastFilter.map((last) => (
-		<option value={last}>{last}</option>
-	));
+	const lastOptions = mapOptions(lastFilter);
 
 	const phoneFilter = cars.map((car) => car.phone);
-	const phoneOptions = phoneFilter.map((phone) => (
-		<option value={phone}>{phone}</option>
-	));
+	const phoneOptions = mapOptions(phoneFilter);
 
 	return (
 		<div>
