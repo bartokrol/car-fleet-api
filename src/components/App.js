@@ -108,9 +108,13 @@ function App() {
 						favorite: false,
 						more: false,
 					});
-					carId++;
 
-					const intervalCarDistance = (speed) => {
+					const handleInterval = (
+						id,
+						speed,
+						geoWidthPosition,
+						geoLengthPosition
+					) => {
 						const distanceInThreeSeconds = (
 							(speed / 3.6) *
 							3
@@ -129,29 +133,40 @@ function App() {
 
 						setCars((cars) => {
 							cars = [...cars];
-							cars = cars.map((car) => {
-								car[car.carId] = {
-									...car[car.carId],
-									geoPosition: {
-										geoWidthPosition:
-											Number(geoWidthPosition) +
-											degreesWidthInThreeSeconds,
-										geoLengthPosition:
-											Number(geoLengthPosition) +
-											degreesLengthInThreeSeconds,
-									},
-								};
-								return car;
-							});
+							cars[id] = {
+								...cars[id],
+								geoPosition: {
+									geoWidthPosition: (
+										Number(geoWidthPosition) +
+										degreesWidthInThreeSeconds
+									).toFixed(4),
+									geoLengthPosition: (
+										Number(geoLengthPosition) +
+										degreesLengthInThreeSeconds
+									).toFixed(4),
+								},
+							};
 							localStorage.setItem("cars", JSON.stringify(cars));
 							return cars;
 						});
 					};
-					// setInterval(() => intervalCarDistance(speed), 3000);
+					const startInterval = (carId) => {
+						setInterval(function () {
+							handleInterval(
+								carId,
+								speed,
+								geoWidthPosition,
+								geoLengthPosition
+							);
+						}, 3000);
+					};
+					startInterval(carId);
+
+					carId++;
 				} while (fetchedCars.length < carsCount);
 				if (fetchedCars.length === carsCount) {
 					setCars(fetchedCars);
-					localStorage.setItem("cars", JSON.stringify(fetchedCars));
+					// localStorage.setItem("cars", JSON.stringify(fetchedCars));
 				}
 			}
 			fetchDrivers();
