@@ -4,11 +4,29 @@ const carsCount = 20;
 const letters = "ABCDEFZGHIJKLMNOPQRSTWXYZ";
 const licenseNumberCount = 3;
 const DRIVER_API = `https://randomuser.me/api/?results=${carsCount}&inc=name`;
+const lengthGeo = {
+	min: 14.07,
+	max: 24.09,
+};
+const widthGeo = {
+	min: 49.0,
+	max: 54.5,
+};
 
 function App() {
 	const [cars, setCars] = useState([]);
 
 	useEffect(() => {
+		const fetchGeoPosition = () => {
+			const geoWidthPosition = fetchGeo(widthGeo.min, widthGeo.max);
+			const geoLenghtPosition = fetchGeo(lengthGeo.min, lengthGeo.max);
+			return { geoWidthPosition, geoLenghtPosition };
+		};
+		const fetchGeo = (min, max) => {
+			const geo = Math.random() * (max - min) + min;
+			return geo.toFixed(4);
+		};
+
 		const fetchPhoneNumber = () => {
 			const phoneNumber = Math.random().toString().slice(4, 13);
 			return phoneNumber;
@@ -39,12 +57,16 @@ function App() {
 				const licenseNumber = fetchLicense(licenseNumberCount);
 				const { first, last } = drivers[carId].name;
 				const phone = fetchPhoneNumber();
+				const { geoWidthPosition, geoLenghtPosition } =
+					fetchGeoPosition();
 				fetchedCars.push({
 					carId,
 					licenseNumber,
 					first,
 					last,
 					phone,
+					geoWidthPosition,
+					geoLenghtPosition,
 				});
 				carId++;
 			} while (fetchedCars.length < carsCount);
